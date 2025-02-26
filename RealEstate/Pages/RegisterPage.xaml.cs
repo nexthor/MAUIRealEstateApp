@@ -34,7 +34,7 @@ public partial class RegisterPage : ContentPage
             await DisplayAlert("Success", "User registered successfully", "Ok");
 
             var loginPage = ProvideService.GetService<LoginPage>();
-            await Shell.Current.Navigation.PushAsync(loginPage);
+            await Navigation.PushAsync(loginPage);
         }
         catch (Exception ex)
         {
@@ -45,6 +45,6 @@ public partial class RegisterPage : ContentPage
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
         var loginPage = ProvideService.GetService<LoginPage>();
-        await Shell.Current.Navigation.PushAsync(loginPage);
+        await Navigation.PushAsync(loginPage);
     }
 }

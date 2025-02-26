@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="RealEstate.Pages.RegisterPage"
              Title="RegisterPage"
-             Shell.NavBarIsVisible="False">
+             NavigationPage.HasNavigationBar="False">
     <VerticalStackLayout VerticalOptions="Center"
                          Margin="20,0,20,0"
                          Spacing="20">

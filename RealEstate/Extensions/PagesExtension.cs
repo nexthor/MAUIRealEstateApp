@@ -6,10 +6,12 @@ namespace RealEstate.Extensions
     {
         public static IServiceCollection AddPages(this IServiceCollection services)
         {
-            services.AddTransient<MainPage>();
             services.AddTransient<RegisterPage>();
             services.AddTransient<LoginPage>();
             services.AddTransient<HomePage>();
+            services.AddTransient<BookmarksPage>();
+            services.AddTransient<CustomTabPage>();
+            services.AddTransient<SettingsPage>();
 
             return services;
         }

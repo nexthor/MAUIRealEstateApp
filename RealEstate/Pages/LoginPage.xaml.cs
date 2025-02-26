@@ -29,8 +29,8 @@ public partial class LoginPage : ContentPage
 
             await DisplayAlert("Success", "Welcome back!", "Ok");
 
-            var homePage = ProvideService.GetService<HomePage>();
-            await Shell.Current.Navigation.PushAsync(homePage);
+            var homePage = ProvideService.GetService<CustomTabPage>();
+            await Navigation.PushAsync(homePage);
         }
         catch (Exception ex)
         {
@@ -41,6 +41,6 @@ public partial class LoginPage : ContentPage
     private async void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
         var registerPage = ProvideService.GetService<RegisterPage>();
-        await Shell.Current.Navigation.PushAsync(registerPage);
+        await Navigation.PushAsync(registerPage);
     }
 }

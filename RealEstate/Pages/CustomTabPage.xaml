@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            x:Class="RealEstate.Pages.CustomTabPage"
+            xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
+            xmlns:local="clr-namespace:RealEstate.Pages"
+            NavigationPage.HasNavigationBar="False"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            BarBackgroundColor="#f0f0f0">
+    
+    <local:HomePage Title="Home" IconImageSource="home_icon"/>
+    <local:BookmarksPage Title="Saved" IconImageSource="bookmark_icon"/>
+    <local:SettingsPage Title="Settings" IconImageSource="settings_icon"/>
+    
+</TabbedPage>
