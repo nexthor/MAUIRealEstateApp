@@ -1,4 +1,6 @@
-﻿namespace RealEstate
+﻿using RealEstate.Pages;
+
+namespace RealEstate
 {
     public partial class App : Application
     {
@@ -6,7 +8,7 @@
         {
             InitializeComponent();
 
-            MainPage = serviceProvider.GetService<MainPage>();
+            MainPage = serviceProvider.GetService<RegisterPage>();
         }
     }
 }

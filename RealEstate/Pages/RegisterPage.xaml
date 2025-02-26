@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RealEstate.Pages.RegisterPage"
+             Title="RegisterPage">
+    <VerticalStackLayout VerticalOptions="Center"
+                         Margin="20,0,20,0"
+                         Spacing="20">
+        <Image Source="dotnet_bot.png"
+               HorizontalOptions="Center"/>
+        <Label FontSize="Title"
+               Text="Create a new account"
+               HorizontalOptions="Center"
+               FontAttributes="Bold"/>
+        <Label FontSize="Body"
+               Text="Please enter your information below to create a new account for using the app" />
+        
+        <Entry FontSize="Medium" 
+               Placeholder="Full Name" 
+               x:Name="entFullName"
+               />
+        
+        <Entry FontSize="Medium" 
+               Placeholder="Email"
+               Keyboard="Email"
+               x:Name="entEmail"/>
+        
+        <Entry FontSize="Medium" 
+               Placeholder="Phone"
+               Keyboard="Telephone"
+               x:Name="entPhone"/>
+        
+        <Entry FontSize="Medium"
+               Placeholder="Password" 
+               IsPassword="True" 
+               x:Name="entPassword"/>
+        
+        <Button Text="Register Now" 
+                HorizontalOptions="FillAndExpand"
+                FontSize="Medium"
+                HeightRequest="50"
+                x:Name="btnRegister"
+                Clicked="btnRegister_Clicked"/>
+
+        <HorizontalStackLayout HorizontalOptions="Center"
+                               Spacing="10">
+            <Label Text="Already have an account?" TextColor="#101010" />
+            <Label Text="Sing In" TextColor="#1d94ab" />
+            
+            <HorizontalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+            </HorizontalStackLayout.GestureRecognizers>
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

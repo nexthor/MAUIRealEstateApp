@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using RealEstate.Extensions;
 using RealEstate.Services;
 using System.Reflection;
 
@@ -27,7 +28,7 @@ namespace RealEstate
             builder.Configuration.AddConfiguration(config);
             builder.Services.AddHttpClient();
             builder.Services.AddScoped<IApiService, ApiService>();
-            builder.Services.AddScoped<MainPage>();
+            builder.Services.AddPages();
 
 #if DEBUG
             builder.Logging.AddDebug();
