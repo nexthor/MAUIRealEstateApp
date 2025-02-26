@@ -9,6 +9,7 @@ namespace RealEstate.Extensions
             services.AddTransient<MainPage>();
             services.AddTransient<RegisterPage>();
             services.AddTransient<LoginPage>();
+            services.AddTransient<HomePage>();
 
             return services;
         }
