@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace RealEstate
+namespace RealEstate.Platforms.MacCatalyst
 {
     [Register("AppDelegate")]
     public class AppDelegate : MauiUIApplicationDelegate
