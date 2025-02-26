@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
+using RealEstate.Extensions;
 using RealEstate.Models;
 using System.Net.Http.Json;
 
@@ -35,50 +35,59 @@ namespace RealEstate.Services
         #endregion
 
         #region Property interactions
-        public async Task<Property[]> GetPropertiesAsync(int categoryId)
+        public async Task<ICollection<Property>> GetPropertiesAsync(int categoryId)
         {
-            var response = await _httpClient.GetFromJsonAsync<Property[]>($"Properties/PropertyList?categoryId={categoryId}");
+            var response = await _httpClient.SetToken().GetFromJsonAsync<Property[]>($"Properties/PropertyList?categoryId={categoryId}");
             return response ?? throw new Exception("No response from the server");
         }
 
         public async Task<Property> GetPropertyAsync(int id)
         {
-            var response = await _httpClient.GetFromJsonAsync<Property>($"Properties/PropertyDetail?id={id}");
+            _httpClient.SetToken();
+            var response = await _httpClient.SetToken().GetFromJsonAsync<Property>($"Properties/PropertyDetail?id={id}");
             return response ?? throw new Exception("No response from the server");
         }
 
-        public async Task<Property[]> GetTrendingPropertiesAsync()
+        public async Task<ICollection<Property>> GetTrendingPropertiesAsync()
         {
-            var response = await _httpClient.GetFromJsonAsync<Property[]>("Properties/TrendingProperties");
+            var response = await _httpClient.SetToken().GetFromJsonAsync<ICollection<Property>>("Properties/TrendingProperties");
             return response ?? throw new Exception("No response from the server");
         }
 
-        public async Task<Property[]> SearchProperties(string query)
+        public async Task<ICollection<Property>> SearchProperties(string query)
         {
-            var response = await _httpClient.GetFromJsonAsync<Property[]>($"Properties/SearchProperties?address={query}");
+            var response = await _httpClient.SetToken().GetFromJsonAsync<ICollection<Property>>($"Properties/SearchProperties?address={query}");
             return response ?? throw new Exception("No response from the server");
         }
         #endregion
 
         #region Bookmark interactions
-        public async Task<Bookmark[]> GetBookmarksAsync()
+        public async Task<ICollection<Bookmark>> GetBookmarksAsync()
         {
-            var response = await _httpClient.GetFromJsonAsync<Bookmark[]>($"bookmarks");
+            var response = await _httpClient.SetToken().GetFromJsonAsync<Bookmark[]>($"bookmarks");
             return response ?? throw new Exception("No response from the server");
         }
 
         public async Task AddBookmarkAsync(int propertyId, int userId)
         {
-            var response = await _httpClient.PostAsJsonAsync("bookmarks", new { PropertyId = propertyId, User_Id = userId });
+            var response = await _httpClient.SetToken().PostAsJsonAsync("bookmarks", new { PropertyId = propertyId, User_Id = userId });
             if (!response.IsSuccessStatusCode)
                 throw new Exception("Failed to add bookmark");
         }
 
         public async Task RemoveBookmarkAsync(int bookmarkId)
         {
-            var response = await _httpClient.DeleteAsync($"bookmarks/{bookmarkId}");
+            var response = await _httpClient.SetToken().DeleteAsync($"bookmarks/{bookmarkId}");
             if (!response.IsSuccessStatusCode)
                 throw new Exception("Failed to remove bookmark");
+        }
+        #endregion
+
+        #region Category interactions
+        public async Task<ICollection<Category>> GetCategoriesAsync()
+        {
+            var response = await _httpClient.SetToken().GetFromJsonAsync<ICollection<Category>>("categories");
+            return response ?? throw new Exception("No response from the server");
         }
         #endregion
     }

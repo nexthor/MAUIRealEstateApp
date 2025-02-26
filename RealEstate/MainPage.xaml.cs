@@ -21,6 +21,7 @@ namespace RealEstate
             // when the user logs in, the token should be stored in preferences
             Preferences.Set(RealEstateConstants.AccessToken, login.Token);
 
+            var categories = await _apiService.GetCategoriesAsync();
             count++;
 
             if (count == 1)
