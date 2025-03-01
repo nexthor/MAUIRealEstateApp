@@ -4,10 +4,54 @@
              x:Class="RealEstate.Pages.HomePage"
              Title="HomePage"
              NavigationPage.HasNavigationBar="False">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome HOME!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <ScrollView>
+        <Grid Margin="20" RowSpacing="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <VerticalStackLayout Grid.Row="0">
+                <Label x:Name="lblUsername"
+                       Text="Welcome back fulano!"
+                       FontSize="Large"/>
+                <Label Text="find your best place to stay"
+                       FontSize="Medium"/>
+            </VerticalStackLayout>
+
+            <Frame Grid.Row="1" Padding="15">
+                <HorizontalStackLayout Spacing="20">
+                    <Image Source="search_icon"
+                           Aspect="AspectFit"
+                           HeightRequest="25"
+                           WidthRequest="25"/>
+                    <Label Text="Search..." 
+                           VerticalOptions="Center" />
+                </HorizontalStackLayout>
+            </Frame>
+
+            <VerticalStackLayout Grid.Row="2" Spacing="20">
+                <Label Text="Categories"
+                       FontSize="Large"/>
+
+                <CollectionView x:Name="cvCategories"
+                                HeightRequest="50">
+                
+                </CollectionView>
+
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Row="3" Spacing="20">
+                <Label Text="Top Picks"
+                       FontSize="Large"/>
+
+                <CollectionView x:Name="cvTopics"
+                                HeightRequest="350">
+                
+                </CollectionView>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

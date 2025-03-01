@@ -22,13 +22,13 @@ namespace RealEstate.Services
         #region User interactions
         public async Task<LoginResponse> LoginAsync(Login login)
         {
-            var response = await _httpClient.PostAsJsonAsync("users/login", login);
+            var response = await _httpClient.PostAsJsonAsync("api/users/login", login);
             return await response.Content.ReadFromJsonAsync<LoginResponse>() ?? throw new Exception("No response from the server");
         }
 
         public async Task RegisterUser(Register register)
         {
-            var response = await _httpClient.PostAsJsonAsync("users/register", register);
+            var response = await _httpClient.PostAsJsonAsync("api/users/register", register);
             if (!response.IsSuccessStatusCode)
                 throw new Exception("Failed to register user");
         }
@@ -37,26 +37,26 @@ namespace RealEstate.Services
         #region Property interactions
         public async Task<ICollection<Property>> GetPropertiesAsync(int categoryId)
         {
-            var response = await _httpClient.SetToken().GetFromJsonAsync<Property[]>($"Properties/PropertyList?categoryId={categoryId}");
+            var response = await _httpClient.SetToken().GetFromJsonAsync<Property[]>($"api/Properties/PropertyList?categoryId={categoryId}");
             return response ?? throw new Exception("No response from the server");
         }
 
         public async Task<Property> GetPropertyAsync(int id)
         {
             _httpClient.SetToken();
-            var response = await _httpClient.SetToken().GetFromJsonAsync<Property>($"Properties/PropertyDetail?id={id}");
+            var response = await _httpClient.SetToken().GetFromJsonAsync<Property>($"api/Properties/PropertyDetail?id={id}");
             return response ?? throw new Exception("No response from the server");
         }
 
         public async Task<ICollection<Property>> GetTrendingPropertiesAsync()
         {
-            var response = await _httpClient.SetToken().GetFromJsonAsync<ICollection<Property>>("Properties/TrendingProperties");
+            var response = await _httpClient.SetToken().GetFromJsonAsync<ICollection<Property>>("api/Properties/TrendingProperties");
             return response ?? throw new Exception("No response from the server");
         }
 
         public async Task<ICollection<Property>> SearchProperties(string query)
         {
-            var response = await _httpClient.SetToken().GetFromJsonAsync<ICollection<Property>>($"Properties/SearchProperties?address={query}");
+            var response = await _httpClient.SetToken().GetFromJsonAsync<ICollection<Property>>($"api/Properties/SearchProperties?address={query}");
             return response ?? throw new Exception("No response from the server");
         }
         #endregion
@@ -64,20 +64,20 @@ namespace RealEstate.Services
         #region Bookmark interactions
         public async Task<ICollection<Bookmark>> GetBookmarksAsync()
         {
-            var response = await _httpClient.SetToken().GetFromJsonAsync<Bookmark[]>($"bookmarks");
+            var response = await _httpClient.SetToken().GetFromJsonAsync<Bookmark[]>("api/bookmarks");
             return response ?? throw new Exception("No response from the server");
         }
 
         public async Task AddBookmarkAsync(int propertyId, int userId)
         {
-            var response = await _httpClient.SetToken().PostAsJsonAsync("bookmarks", new { PropertyId = propertyId, User_Id = userId });
+            var response = await _httpClient.SetToken().PostAsJsonAsync("api/bookmarks", new { PropertyId = propertyId, User_Id = userId });
             if (!response.IsSuccessStatusCode)
                 throw new Exception("Failed to add bookmark");
         }
 
         public async Task RemoveBookmarkAsync(int bookmarkId)
         {
-            var response = await _httpClient.SetToken().DeleteAsync($"bookmarks/{bookmarkId}");
+            var response = await _httpClient.SetToken().DeleteAsync($"api/bookmarks/{bookmarkId}");
             if (!response.IsSuccessStatusCode)
                 throw new Exception("Failed to remove bookmark");
         }
@@ -86,8 +86,16 @@ namespace RealEstate.Services
         #region Category interactions
         public async Task<ICollection<Category>> GetCategoriesAsync()
         {
-            var response = await _httpClient.SetToken().GetFromJsonAsync<ICollection<Category>>("categories");
-            return response ?? throw new Exception("No response from the server");
+            var response = await _httpClient.SetToken().GetFromJsonAsync<ICollection<Category>>("api/categories");
+            var categories = response ?? throw new Exception("No response from the server");
+            return categories.Select(x => new Category
+                {
+                    Id = x.Id,
+                    Name = x.Name,
+                    ImageUrl = x.ImageUrl,
+                    FullImageUrl = $"{_settings.BaseUrl}{x.ImageUrl}",
+                    Properties = x.Properties
+                }).ToList();
         }
         #endregion
     }

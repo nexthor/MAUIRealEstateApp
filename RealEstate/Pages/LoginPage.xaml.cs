@@ -22,7 +22,10 @@ public partial class LoginPage : ContentPage
 
         try
         {
-            await _apiService.LoginAsync(login);
+            var response = await _apiService.LoginAsync(login);
+            Preferences.Set(RealEstateConstants.AccessToken, response.Token);
+            Preferences.Set(RealEstateConstants.UserId, response.UserId);
+            Preferences.Set(RealEstateConstants.UserName, response.UserName);
 
             entEmail.Text = null;
             entPassword.Text = null;

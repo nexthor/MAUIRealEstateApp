@@ -10,11 +10,9 @@ namespace RealEstate
             var loginPage = services.GetService<LoginPage>();
             var tabbedPage = services.GetService<CustomTabPage>();
             var token = Preferences.Get(RealEstateConstants.AccessToken, string.Empty);
+            Page? page = string.IsNullOrEmpty(token) ? loginPage : tabbedPage;
 
-            if (!string.IsNullOrEmpty(token))
-                MainPage = new NavigationPage(tabbedPage);
-            else
-                MainPage = new NavigationPage(loginPage);
+            MainPage = new NavigationPage(page);
         }
     }
 }
