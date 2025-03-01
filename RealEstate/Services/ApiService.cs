@@ -51,7 +51,21 @@ namespace RealEstate.Services
         public async Task<ICollection<Property>> GetTrendingPropertiesAsync()
         {
             var response = await _httpClient.SetToken().GetFromJsonAsync<ICollection<Property>>("api/Properties/TrendingProperties");
-            return response ?? throw new Exception("No response from the server");
+            var properties = response ?? throw new Exception("No response from the server");
+            return properties.Select(x => new Property
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Detail = x.Detail,
+                Address = x.Address,
+                Price = x.Price,
+                IsTrending = x.IsTrending,
+                UserId = x.UserId,
+                ImageUrl = x.ImageUrl,
+                FullImageUrl = $"{_settings.BaseUrl}{x.ImageUrl}",
+                CategoryId = x.CategoryId,
+                Bookmarks = x.Bookmarks
+            }).ToList(); ;
         }
 
         public async Task<ICollection<Property>> SearchProperties(string query)

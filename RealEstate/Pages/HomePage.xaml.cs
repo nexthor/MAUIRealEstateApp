@@ -18,5 +18,8 @@ public partial class HomePage : ContentPage
         base.OnAppearing();
         var categories = await _apiService.GetCategoriesAsync();
         cvCategories.ItemsSource = categories;
+
+        var trending = await _apiService.GetTrendingPropertiesAsync();
+        cvTopics.ItemsSource = trending;
     }
 }
