@@ -65,7 +65,34 @@
 
                 <CollectionView x:Name="cvTopics"
                                 HeightRequest="350">
-                
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame CornerRadius="10">
+                                <VerticalStackLayout HeightRequest="300" Spacing="5">
+                                    <Frame CornerRadius="10" 
+                                           Margin="0" 
+                                           Padding="0"
+                                           BorderColor="Gray">
+                                        <Image Source="{Binding FullImageUrl}" 
+                                               Aspect="AspectFill"
+                                               HeightRequest="200"
+                                               WidthRequest="250"
+                                               />
+                                    </Frame>
+                                    <Label FontSize="Medium" 
+                                           Text="{Binding Name}"
+                                           FontAttributes="Bold"/>
+                                    <Label FontSize="Body" Text="{Binding Address}" />
+                                    <Label FontSize="Medium"
+                                           TextColor="#187ec9"
+                                           Text="{Binding Price}"/>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
                 </CollectionView>
             </VerticalStackLayout>
         </Grid>
