@@ -36,14 +36,16 @@
                 <Label Text="Categories"
                        FontSize="Large"/>
 
-                <CollectionView x:Name="cvCategories"
-                                HeightRequest="70">
+                <CollectionView x:Name="CvCategories"
+                                HeightRequest="70"
+                                SelectionMode="Single"
+                                SelectionChanged="CvCategories_SelectionChanged">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame>
+                            <Border StrokeShape="RoundRectangle 10" Padding="5, 10">
                                 <HorizontalStackLayout HeightRequest="30" Spacing="5">
                                     <Image Aspect="AspectFit" 
                                            HeightRequest="30"
@@ -52,7 +54,7 @@
                                            FontSize="Medium"
                                            Text="{Binding Name}"/>
                                 </HorizontalStackLayout>
-                            </Frame>
+                            </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
@@ -63,7 +65,7 @@
                 <Label Text="Top Picks"
                        FontSize="Large"/>
 
-                <CollectionView x:Name="cvTopics"
+                <CollectionView x:Name="CvTopics"
                                 HeightRequest="350">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20"/>

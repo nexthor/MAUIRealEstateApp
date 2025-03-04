@@ -5,9 +5,12 @@
             xmlns:android="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.AndroidSpecific;assembly=Microsoft.Maui.Controls"
             xmlns:local="clr-namespace:RealEstate.Pages"
             NavigationPage.HasNavigationBar="False"
-            android:TabbedPage.ToolbarPlacement="Bottom"
-            BarBackgroundColor="#f0f0f0">
-    
+            android:TabbedPage.ToolbarPlacement="Bottom">
+    <!--<NavigationPage>
+        <x:Arguments>
+            <local:HomePage Title="Home" IconImageSource="home_icon"/>
+        </x:Arguments>    
+    </NavigationPage>-->
     <local:HomePage Title="Home" IconImageSource="home_icon"/>
     <local:BookmarksPage Title="Saved" IconImageSource="bookmark_icon"/>
     <local:SettingsPage Title="Settings" IconImageSource="settings_icon"/>

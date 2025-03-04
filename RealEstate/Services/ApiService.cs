@@ -38,7 +38,21 @@ namespace RealEstate.Services
         public async Task<ICollection<Property>> GetPropertiesAsync(int categoryId)
         {
             var response = await _httpClient.SetToken().GetFromJsonAsync<Property[]>($"api/Properties/PropertyList?categoryId={categoryId}");
-            return response ?? throw new Exception("No response from the server");
+            var properties = response ?? throw new Exception("No response from the server");
+            return properties.Select(x => new Property
+            {
+                Id = x.Id,
+                Name = x.Name,
+                Detail = x.Detail,
+                Address = x.Address,
+                Price = x.Price,
+                IsTrending = x.IsTrending,
+                UserId = x.UserId,
+                ImageUrl = x.ImageUrl,
+                FullImageUrl = $"{_settings.BaseUrl}{x.ImageUrl}",
+                CategoryId = x.CategoryId,
+                Bookmarks = x.Bookmarks
+            }).ToList(); ;
         }
 
         public async Task<Property> GetPropertyAsync(int id)

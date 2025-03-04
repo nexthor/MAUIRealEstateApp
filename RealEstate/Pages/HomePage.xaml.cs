@@ -1,3 +1,4 @@
+using RealEstate.Models;
 using RealEstate.Services;
 
 namespace RealEstate.Pages;
@@ -17,9 +18,19 @@ public partial class HomePage : ContentPage
     {
         base.OnAppearing();
         var categories = await _apiService.GetCategoriesAsync();
-        cvCategories.ItemsSource = categories;
+        CvCategories.ItemsSource = categories;
 
         var trending = await _apiService.GetTrendingPropertiesAsync();
-        cvTopics.ItemsSource = trending;
+        CvTopics.ItemsSource = trending;
+    }
+
+    private void CvCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var category = e.CurrentSelection.FirstOrDefault() as Category;
+        if (category == null)
+            return;
+
+        Navigation.PushAsync(new PropertyList(category));
+        ((CollectionView)sender).SelectedItem = null;
     }
 }
