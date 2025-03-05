@@ -12,7 +12,7 @@ namespace RealEstate.Services
         Task<LoginResponse> LoginAsync(Login login);
         Task RegisterUser(Register register);
         Task RemoveBookmarkAsync(int propertyId);
-        Task<ICollection<Property>> SearchProperties(string query);
+        Task<ICollection<Property>> SearchPropertiesAsync(string query);
         Task<ICollection<Category>> GetCategoriesAsync();
     }
 }

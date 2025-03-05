@@ -14,6 +14,7 @@ namespace RealEstate.Extensions
             services.AddTransient<SettingsPage>();
             services.AddTransient<PropertyList>();
             services.AddTransient<PropertyDetail>();
+            services.AddTransient<SearchPage>();
 
             return services;
         }

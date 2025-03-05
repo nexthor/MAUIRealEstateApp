@@ -82,7 +82,7 @@ namespace RealEstate.Services
             }).ToList(); ;
         }
 
-        public async Task<ICollection<Property>> SearchProperties(string query)
+        public async Task<ICollection<Property>> SearchPropertiesAsync(string query)
         {
             var response = await _httpClient.SetToken().GetFromJsonAsync<ICollection<Property>>($"api/Properties/SearchProperties?address={query}");
             return response ?? throw new Exception("No response from the server");
