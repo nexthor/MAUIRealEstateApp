@@ -11,7 +11,7 @@ namespace RealEstate.Services
         Task<ICollection<Property>> GetTrendingPropertiesAsync();
         Task<LoginResponse> LoginAsync(Login login);
         Task RegisterUser(Register register);
-        Task RemoveBookmarkAsync(int propertyId);
+        Task RemoveBookmarkAsync(int bookmarkId);
         Task<ICollection<Property>> SearchPropertiesAsync(string query);
         Task<ICollection<Category>> GetCategoriesAsync();
     }
