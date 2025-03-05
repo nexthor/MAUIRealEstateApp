@@ -66,24 +66,27 @@
                        FontSize="Large"/>
 
                 <CollectionView x:Name="CvTopics"
-                                HeightRequest="350">
+                                HeightRequest="350"
+                                SelectionMode="Single"
+                                SelectionChanged="CvTopics_SelectionChanged">
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Horizontal" ItemSpacing="20"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame CornerRadius="10">
-                                <VerticalStackLayout HeightRequest="300" Spacing="5">
-                                    <Frame CornerRadius="10" 
+                            <Border StrokeShape="RoundRectangle 10" HeightRequest="350" Padding="10">
+                                <VerticalStackLayout HeightRequest="320" 
+                                                     Spacing="5"
+                                                     WidthRequest="200">
+                                    <Border StrokeShape="RoundRectangle 10" 
                                            Margin="0" 
-                                           Padding="0"
-                                           BorderColor="Gray">
+                                           Padding="0">
                                         <Image Source="{Binding FullImageUrl}" 
-                                               Aspect="AspectFill"
-                                               HeightRequest="200"
-                                               WidthRequest="250"
+                                               Aspect="Fill"
+                                               HeightRequest="150"
+                                               WidthRequest="200"
                                                />
-                                    </Frame>
+                                    </Border>
                                     <Label FontSize="Medium" 
                                            Text="{Binding Name}"
                                            FontAttributes="Bold"/>
@@ -92,7 +95,7 @@
                                            TextColor="#187ec9"
                                            Text="{Binding Price}"/>
                                 </VerticalStackLayout>
-                            </Frame>
+                            </Border>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>

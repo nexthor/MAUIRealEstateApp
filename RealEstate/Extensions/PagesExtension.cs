@@ -13,6 +13,7 @@ namespace RealEstate.Extensions
             services.AddTransient<CustomTabPage>();
             services.AddTransient<SettingsPage>();
             services.AddTransient<PropertyList>();
+            services.AddTransient<PropertyDetail>();
 
             return services;
         }

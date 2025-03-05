@@ -33,4 +33,14 @@ public partial class HomePage : ContentPage
         Navigation.PushAsync(new PropertyList(category));
         ((CollectionView)sender).SelectedItem = null;
     }
+
+    private void CvTopics_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var property = e.CurrentSelection.FirstOrDefault() as Property;
+        if (property == null)
+            return;
+
+        Navigation.PushAsync(new PropertyDetail(property));
+        ((CollectionView)sender).SelectedItem = null;
+    }
 }

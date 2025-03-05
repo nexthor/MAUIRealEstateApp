@@ -18,6 +18,16 @@ public partial class PropertyList : ContentPage
         base.OnAppearing();
         var apiService = ProvideService.GetService<IApiService>() ?? throw new Exception("service cannot be found");
         var properties = await apiService.GetPropertiesAsync(_category.Id);
-        cvProperties.ItemsSource = properties;
+        CvProperties.ItemsSource = properties;
+    }
+
+    private void CvProperties_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        var property = e.CurrentSelection.FirstOrDefault() as Property;
+        if (property == null)
+            return;
+
+        Navigation.PushAsync(new PropertyDetail(property));
+        ((CollectionView)sender).SelectedItem = null;
     }
 }

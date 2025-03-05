@@ -4,16 +4,18 @@
              x:Class="RealEstate.Pages.PropertyList"
              Title="PropertyList">
     <ScrollView>
-        <CollectionView x:Name="cvProperties"
-                        Margin="10">
+        <CollectionView x:Name="CvProperties"
+                        Margin="10"
+                        SelectionMode="Single"
+                        SelectionChanged="CvProperties_SelectionChanged">
             <CollectionView.ItemsLayout>
                 <LinearItemsLayout Orientation="Vertical" ItemSpacing="5"/>
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame BorderColor="Transparent" Padding="5">
+                    <Border StrokeShape="RoundRectangle 10" Padding="5, 10">
                         <HorizontalStackLayout HeightRequest="100" Spacing="5">
-                            <Frame CornerRadius="10" 
+                            <Border StrokeShape="RoundRectangle 10" 
                                            Margin="0" 
                                            Padding="0">
                                 <Image Source="{Binding FullImageUrl}" 
@@ -21,7 +23,7 @@
                                                HeightRequest="100"
                                                WidthRequest="100"
                                                />
-                            </Frame>
+                            </Border>
                             <VerticalStackLayout Spacing="5" WidthRequest="250">
                                 
                                 <Label FontSize="Medium" 
@@ -33,7 +35,7 @@
                                                Text="{Binding Price}"/>
                             </VerticalStackLayout>
                         </HorizontalStackLayout>
-                    </Frame>
+                    </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
